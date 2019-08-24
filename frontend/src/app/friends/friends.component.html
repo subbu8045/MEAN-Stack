@@ -1,0 +1,60 @@
+<nav class="navbar navbar-dark bg-white justify-content-between">
+  <div class="container">
+    <a class="navbar-brand" rotuterLink='/friends'>Friends</a>
+    <form class="form-inline">
+      <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> -->
+      <button type="button" class="btn btn-outline-dark add-new" routerLink="/add"><i class="fa fa-plus"></i> Add New</button>
+    </form>
+  </div>
+
+</nav>
+<div class="container-fluid">
+  <div class=" row justify-content-center">
+    <div class="card">
+      <div class="friend-details card-body">
+        <div class="col-md-12">
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead class="thead-dark">
+                <tr>
+                  <th>Name</th>
+                  <th>Location</th>
+                  <th>Expertise</th>
+                  <th>Salary</th>
+                  <th>Birthday</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let friend of friends">
+                  <td>
+                    {{friend.name}}
+                  </td>
+                  <td>
+                    {{friend.location}}
+                  </td>
+                  <td>
+                    {{friend.expertise}}
+                  </td>
+                  <td>
+                    {{friend.salary}}
+                  </td>
+                  <td>
+                    {{friend.birthday}}
+                  </td>
+                  <td>
+                    <a class="edit" title="Edit" data-toggle="tooltip" (click)="editFriend(friend._id)">
+                      <i class="material-icons ">edit</i>
+                    </a>
+                    <a class="delete" title="Delete" data-toggle="tooltip" (click)="deleteFriend(friend._id)">
+                      <i class="material-icons ">delete</i>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

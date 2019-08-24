@@ -1,0 +1,139 @@
+<nav class="navbar navbar-dark bg-white justify-content-between">
+  <div class="container">
+    <a class="navbar-brand" rotuterLink='/friends'>Add-Friend</a>
+  </div>
+</nav>
+<div class="container-fluid">
+  <div class="card">
+    <div class="friend-details card-body">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <form [formGroup]="createForm">
+            <div class="form-row">
+              <label for="Name" class="col-sm-2 col-form-label">Name</label>
+              <div class="col">
+                <div class="name">
+                  <input type="text" class="form-control" name="name" id="name" placeholder="Full Name"
+                    formControlName="name" #name>
+                  <div
+                    *ngIf="createForm.get('name').invalid && (createForm.get('name').dirty || createForm.get('name').touched)"
+                    class="hasError">
+                    <div *ngIf="createForm.get('name').hasError('required')">
+                      <div class=" show-error-msg">
+                        <small>This field is required</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <label for="Location" class="col-sm-2 col-form-label">Location</label>
+              <div class="col">
+                <div class="location">
+                  <input type="text" class="form-control" name="location" placeholder="Location" id="location"
+                    formControlName="location" #location>
+                  <div *ngIf="createForm.get('location').invalid && (createForm.get('location').dirty || createForm.get('location').touched)"
+                    class="hasError">
+                    <div *ngIf="createForm.get('location').hasError('required')">
+                      <div class=" show-error-msg">
+                        <small>This field is required</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <label for="Expertise" class="col-sm-2 col-form-label">Expertise</label>
+              <div class="col">
+                <div class="expertise">
+                  <input type="text" class="form-control" name="expertise" placeholder="Expertise" id="expertise"
+                    formControlName="expertise" #expertise>
+                  <div *ngIf="createForm.get('expertise').invalid && (createForm.get('expertise').dirty || createForm.get('expertise').touched)"
+                    class="hasError">
+                    <div *ngIf="createForm.get('expertise').hasError('required')">
+                      <div class=" show-error-msg">
+                        <small>This field is required</small>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <label for="Salary" class="col-sm-2 col-form-label">Salary</label>
+              <div class="col">
+                <div class="salary">
+                  <input type="text" class="form-control" name="salary" id="salary" placeholder="Salary"
+                    formControlName="salary" #salary>
+                  <div *ngIf="createForm.get('salary').invalid && (createForm.get('salary').dirty || createForm.get('salary').touched)"
+                    class="hasError">
+                    <div *ngIf="createForm.get('salary').hasError('required')">
+                      <div class=" show-error-msg">
+                        <small>This field is required</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <label for="birthday" class="col-sm-2 col-form-label">Birthday</label>
+              <div class="col">
+                <div class="birthday">
+                  <input type="text" class="form-control" name="date" id="birthday" formControlName="birthday"
+                    pattern="^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$"
+                    placeholder="Birthday" #birthday>
+                  <small id="birthdayHelperText" class="form-text text-muted">
+                    Format: DD/MM/YYYY
+                  </small>
+                  <div *ngIf="createForm.get('birthday').invalid && (createForm.get('birthday').dirty || createForm.get('birthday').touched)"
+                    class="hasError">
+                    <div *ngIf="createForm.get('birthday').hasError('pattern')">
+                      <div class=" show-error-msg">
+                        <small> Not Valid Date </small>
+                      </div>
+                    </div>
+                    <div *ngIf="createForm.get('birthday').hasError('required')">
+                      <div class=" show-error-msg">
+                        <small>This field is required</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-success"
+              (click)="addFriend(name.value, location.value, expertise.value, salary.value, birthday.value)"
+              [disabled]="createForm.pristine || createForm.invalid" data-toggle="modal"
+              data-target="#info">Save</button>&nbsp;
+            <button type="submit" class="btn btn-danger" routerLink="/friends">Back</button>
+          </form>
+          <div class="modal" tabindex="-1" id="info" role="dialog">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-body">
+                  <div *ngIf="showMsg">
+                    <p>Added Friend Successful..!</p>
+                  </div>
+                  <div *ngIf="!showMsg">
+                    <p> Failed..!</p>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" routerLink="/friends" class="btn btn-primary" data-dismiss="modal">Back to
+                    Friends</button>
+                  <div *ngIf="showMsg">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Add Another</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
